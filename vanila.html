@@ -64,23 +64,22 @@
     //     <button onClick = { countUP }>Click Me</button>
     //   </div>
     // );
-
-    let counter = 0;
-    function countUP() {
-      counter += 1;
-      render();
-    }
-    function render() {
-      ReactDOM.render(<Container />, root);
-    }
-    function Container() {
+    function App() {
+      // let counter = 0;
+      // function countUP() {
+      //   //code
+      // }
+      const [counter, setCounter] = React.useState(0); // [data, modifier]
+      const onClick = () => {
+        setCounter(counter + 1); // receive value -> rendering
+      };
       return (
         <div>
           <h3>Total Clicks: {counter}</h3>
-          <button onClick={countUP}>Click Me</button>
+          <button onClick={onClick}>Click Me</button>
         </div>
       );
     }
-    render();
+    ReactDOM.render(<App />, root); //Update UI
   </script>
 </html>
