@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script
+    crossorigin
+    src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"
+  ></script>
+  <script
+    crossorigin
+    src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"
+  ></script>
+  <script
+    crossorigin
+    src="https://unpkg.com/@babel/standalone/babel.min.js"
+  ></script>
+  <script type="text/babel">
+    const root = document.getElementById("root");
+    // function Title() {
+    // return (
+    //   <h3 id="Title" onMouseEnter={() => console.log("Mouse Entered")}>
+    //     Hello, I am a Title
+    //   </h3>
+    // );
+    // }
+    /*
+     const h3 = React.createElement(
+       "h3", //HTML 태그
+       {
+         onMouseEnter: () => console.log("mouse enter"), //eventListner 등록
+       }, //property가 속해있는 object
+       "Hello, I am a span" //contents
+     ); //HTML 태그와 똑같은 이름이어야함.
+     */
+
+    /*
+     function Btn() {
+      return (
+        <button
+          style={{ backgroundColor: "tomato" }}
+          onClick={() => console.log("I am Clicked!")}
+        >
+          Click Me
+        </button>
+      );
+    };
+    */
+
+    /* 
+    const Container = () => (
+      <div>
+        <Title />
+        <Btn />
+      </div>
+    );
+    */
+
+    // const container = React.createElement("div", null, [Title, btn]);
+
+    // const Container = () => (
+    //   <div>
+    //     <h3>Total Clicks: {counter}</h3>
+    //     <button onClick = { countUP }>Click Me</button>
+    //   </div>
+    // );
+
+    let counter = 0;
+    function countUP() {
+      counter += 1;
+      render();
+    }
+    function render() {
+      ReactDOM.render(<Container />, root);
+    }
+    function Container() {
+      return (
+        <div>
+          <h3>Total Clicks: {counter}</h3>
+          <button onClick={countUP}>Click Me</button>
+        </div>
+      );
+    }
+    render();
+  </script>
+</html>
