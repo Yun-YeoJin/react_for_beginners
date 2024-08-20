@@ -47,7 +47,7 @@
     };
     */
 
-    /* 
+    /*
     const Container = () => (
       <div>
         <Title />
@@ -56,6 +56,8 @@
     );
     */
 
+    // const container = React.createElement("div", null, [Title, btn]);
+    // const container = React.createElement("div", null, [Title, btn]);
     // const container = React.createElement("div", null, [Title, btn]);
 
     // const Container = () => (
@@ -69,14 +71,30 @@
       // function countUP() {
       //   //code
       // }
-      const [counter, setCounter] = React.useState(0); // [data, modifier]
-      const onClick = () => {
-        setCounter(counter + 1); // receive value -> rendering
+      // const [counter, setCounter] = React.useState(0); // [data, modifier]
+      // const onClick = () => {
+      //   //setCounter(counter + 1);
+      //   setCounter((current) => current + 1); // receive value -> rendering
+      // };
+      const [minutes, setMinutes] = React.useState();
+      const onChange = (event) => {
+        setMinutes(event.target.value);
       };
+
       return (
         <div>
-          <h3>Total Clicks: {counter}</h3>
-          <button onClick={onClick}>Click Me</button>
+          <h1 className="hi"> Super Converter</h1>
+          <label htmlFor="minutes">Minutes</label>
+          <input
+            value={minutes}
+            id="minutes"
+            placeholder="Minutes"
+            type="number"
+            onChange={onChange}
+          />
+          <h4>You want to convert {minutes}</h4>
+          <label htmlFor="hours">Hours</label>
+          <input id="hours" placeholder="Hours" type="number" />
         </div>
       );
     }
