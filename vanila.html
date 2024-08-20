@@ -17,44 +17,108 @@
   ></script>
   <script type="text/babel">
     const root = document.getElementById("root");
-    function App() {
+
+    function KiloMetersToMiles() {
       const [amount, setAmount] = React.useState(0); //Default 값을 준다면 > onChange가 없으면 업데이트 되지 않음.
-      const [flipped, setFlipped] = React.useState(false);
+      const [inverted, setInverted] = React.useState(false);
       const onChange = (event) => {
         setAmount(event.target.value);
       };
       const reset = () => setAmount(0);
       const onFlip = () => {
         reset();
-        setFlipped((current) => !current);
+        setInverted((current) => !current);
       };
       return (
         <div>
-          <h1 className="hi"> Super Converter</h1>
+          <h3>KiloMeters To Miles</h3>
           <div>
-            <label htmlFor="minutes">Minutes</label>
+            <label htmlFor="KiloMeters">KiloMeters</label>
             <input
-              value={flipped ? amount * 60 : amount}
-              id="minutes"
-              placeholder="Minutes"
+              value={inverted ? amount * 60 : amount}
+              id="KiloMeters"
+              placeholder="KiloMeters"
               type="number"
               onChange={onChange}
-              disabled={flipped}
+              disabled={inverted}
             />
           </div>
           <div>
-            <label htmlFor="hours">Hours</label>
+            <label htmlFor="Miles">Miles</label>
             <input
-              value={flipped ? amount : Math.round(amount / 60)}
-              id="hours"
-              placeholder="Hours"
+              value={inverted ? amount : Math.round(amount / 60)}
+              id="Miles"
+              placeholder="Miles"
               type="number"
-              disabled={!flipped}
+              disabled={!inverted}
               onChange={onChange}
             />
           </div>
           <button onClick={reset}>Reset</button>
-          <button onClick={onFlip}>Flip</button>
+          <button onClick={onFlip}>{inverted ? "Turn back" : "Invert"}</button>
+        </div>
+      );
+    }
+
+    function KmToMiles() {
+      const [amount, setAmount] = React.useState(0);
+      const [inverted, setInverted] = React.useState(false);
+      const onChange = (event) => {
+        setAmount(event.target.value);
+      };
+      const reset = () => setAmount(0);
+      const onFlip = () => {
+        reset();
+        setInverted((current) => !current);
+      };
+      return (
+        <div>
+          <h3>Km To Miles</h3>
+          <div>
+            <label htmlFor="KiloMeters">KiloMeters</label>
+            <input
+              value={inverted ? amount * 1.60934 : amount}
+              id="KiloMeters"
+              placeholder="KiloMeters"
+              type="number"
+              onChange={onChange}
+              disabled={inverted}
+            />
+          </div>
+          <div>
+            <label htmlFor="Miles">Miles</label>
+            <input
+              value={inverted ? amount : amount / 1.60934}
+              id="Miles"
+              placeholder="Miles"
+              type="number"
+              disabled={!inverted}
+              onChange={onChange}
+            />
+          </div>
+          <button onClick={reset}>Reset</button>
+          <button onClick={onFlip}>{inverted ? "Turn back" : "Invert"}</button>
+        </div>
+      );
+    }
+
+    function App() {
+      const [index, setIndex] = React.useState("-1");
+      const onSelect = (event) => {
+        setIndex(event.target.value);
+      };
+      return (
+        <div>
+          <h1 className="hi"> Super Converter</h1>
+          <select value={index} onChange={onSelect}>
+            <option value="-1">Select Your Units</option>
+            <option value="0">KiloMeters & Miles</option>
+            <option value="1">KM & Miles</option>
+          </select>
+          <hr />
+          {index === "-1" ? "Please Select Your Units" : null}
+          {index === "0" ? <KiloMetersToMiles /> : null}
+          {index === "1" ? <KmToMiles /> : null}
         </div>
       );
     }
