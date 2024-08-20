@@ -17,94 +17,44 @@
   ></script>
   <script type="text/babel">
     const root = document.getElementById("root");
-    // function Title() {
-    // return (
-    //   <h3 id="Title" onMouseEnter={() => console.log("Mouse Entered")}>
-    //     Hello, I am a Title
-    //   </h3>
-    // );
-    // }
-    /*
-     const h3 = React.createElement(
-       "h3", //HTML 태그
-       {
-         onMouseEnter: () => console.log("mouse enter"), //eventListner 등록
-       }, //property가 속해있는 object
-       "Hello, I am a span" //contents
-     ); //HTML 태그와 똑같은 이름이어야함.
-     */
-
-    /*
-     function Btn() {
-      return (
-        <button
-          style={{ backgroundColor: "tomato" }}
-          onClick={() => console.log("I am Clicked!")}
-        >
-          Click Me
-        </button>
-      );
-    };
-    */
-
-    /*
-    const Container = () => (
-      <div>
-        <Title />
-        <Btn />
-      </div>
-    );
-    */
-
-    // const container = React.createElement("div", null, [Title, btn]);
-    // const container = React.createElement("div", null, [Title, btn]);
-    // const container = React.createElement("div", null, [Title, btn]);
-
-    // const Container = () => (
-    //   <div>
-    //     <h3>Total Clicks: {counter}</h3>
-    //     <button onClick = { countUP }>Click Me</button>
-    //   </div>
-    // );
     function App() {
-      // let counter = 0;
-      // function countUP() {
-      //   //code
-      // }
-      // const [counter, setCounter] = React.useState(0); // [data, modifier]
-      // const onClick = () => {
-      //   //setCounter(counter + 1);
-      //   setCounter((current) => current + 1); // receive value -> rendering
-      // };
-      const [minutes, setMinutes] = React.useState(); //Default 값을 준다면 > onChange가 없으면 업데이트 되지 않음.
+      const [amount, setAmount] = React.useState(0); //Default 값을 준다면 > onChange가 없으면 업데이트 되지 않음.
+      const [flipped, setFlipped] = React.useState(false);
       const onChange = (event) => {
-        setMinutes(event.target.value);
+        setAmount(event.target.value);
       };
-      const reset = () => setMinutes(0);
+      const reset = () => setAmount(0);
+      const onFlip = () => {
+        reset();
+        setFlipped((current) => !current);
+      };
       return (
         <div>
           <h1 className="hi"> Super Converter</h1>
           <div>
             <label htmlFor="minutes">Minutes</label>
             <input
-              value={minutes}
+              value={flipped ? amount * 60 : amount}
               id="minutes"
               placeholder="Minutes"
               type="number"
               onChange={onChange}
+              disabled={flipped}
             />
           </div>
           <div>
             <label htmlFor="hours">Hours</label>
             <input
-              value={Math.round(minutes / 60)}
+              value={flipped ? amount : Math.round(amount / 60)}
               id="hours"
               placeholder="Hours"
               type="number"
-              disabled //선택 못되게 하기
+              disabled={!flipped}
+              onChange={onChange}
             />
           </div>
           <button onClick={reset}>Reset</button>
+          <button onClick={onFlip}>Flip</button>
         </div>
       );
     }
